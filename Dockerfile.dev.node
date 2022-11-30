@@ -1,0 +1,13 @@
+FROM node:19-alpine
+RUN apk --no-cache add curl
+
+WORKDIR /src/app
+
+COPY package*.json ./
+COPY ./cmd ./cmd
+COPY ./internal ./internal
+COPY ./nginx ./nginx
+RUN npm install 
+
+EXPOSE 8000
+CMD [ "npm", "start" ]
